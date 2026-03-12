@@ -1,0 +1,5 @@
+{
+  "name": "FormBuilder Webhook",
+  "description": "Create forms, embed them via iframe, and send submissions and user data to webhooks.",
+  "requestFramePermissions": []
+}
