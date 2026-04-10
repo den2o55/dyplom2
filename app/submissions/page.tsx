@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Loader2, ArrowLeft, Download, Database } from 'lucide-react';
 import Link from 'next/link';
-import type { Submission } from '@/lib/store';
+import type { Submission } from '@/lib/bigquery';
 
 export default function SubmissionsPage() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);

@@ -1,15 +1,17 @@
-import { NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { NextResponse } from "next/server";
+import { insertSubmission } from "@/lib/bigquery";
+
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { formId, formName, data, metadata } = body;
 
-    store.addSubmission({
+    await insertSubmission({
       id: crypto.randomUUID(),
-      formId: formId || 'unknown',
-      formName: formName || 'Untitled Form',
+      formId: formId || "unknown",
+      formName: formName || "Untitled Form",
       data: data || {},
       metadata: metadata || {},
       createdAt: new Date().toISOString(),
@@ -17,6 +19,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: error?.message || "Unknown error" },
+      { status: 500 }
+    );
   }
 }
